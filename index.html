@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tu Comunidad Anónima</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:wght@400;700&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" />
+  <meta name="description" content="Conéctate con tu comunidad de forma anónima. Chismes, opiniones, encuestas y más.">
+</head>
+<body class="theme-default">
+
+  <div id="loader" class="loader hidden"></div>
+
+  <header class="landing-header">
+    <div class="brand">
+      <div class="brand-mark">💬</div>
+      <div class="brand-title">Comunidad Anónima</div>
+    </div>
+    <nav class="landing-nav">
+      <a href="#beneficios">Qué puedes hacer</a>
+      <a href="#reglas">Reglas</a>
+      <a href="#" id="open-auth">Entrar</a>
+    </nav>
+  </header>
+
+  <main class="landing-main">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Conéctate con tu comunidad 🌎</h1>
+        <p class="lead">Comparte <strong>chismes</strong>, opina sin filtros, participa en <strong>encuestas</strong> y gana <strong>logros</strong> — todo de forma <span class="highlight">anónima</span> y divertida.</p>
+        <div class="cta">
+          <button class="btn primary" id="cta-signup">Crear cuenta 🎉</button>
+          <button class="btn ghost" id="cta-login">Iniciar sesión 🔑</button>
+        </div>
+        <ul class="features">
+          <li>🗣️ Foros por secciones (Chismes, Deportes, Estudio, Incomodidades)</li>
+          <li>💬 Chat en tiempo real con alias</li>
+          <li>🏪 Tienda: ruleta, volado, mascotas y pases mensuales</li>
+          <li>🏆 Ranking en tiempo real con medallas</li>
+        </ul>
+      </div>
+      <div class="hero-right">
+        <img src="assets/illustration.svg" class="hero-illu" alt="Ilustración amigable" />
+      </div>
+    </section>
+
+    <section id="beneficios" class="benefits">
+      <div class="benefit-card">⚡ Rápido y anónimo</div>
+      <div class="benefit-card">🎨 Colorido y divertido</div>
+      <div class="benefit-card">🛡️ Moderación y reportes</div>
+      <div class="benefit-card">🎁 Logros y recompensas</div>
+    </section>
+
+    <section id="reglas" class="rules card">
+      <h3>Reglas de la comunidad</h3>
+      <ul id="rules-list">
+        <li>Respeto ante todo.</li>
+        <li>No compartas datos personales.</li>
+        <li>Prohibido acoso, odio o spam.</li>
+        <li>Reporta contenido inapropiado.</li>
+      </ul>
+      <div class="muted">Estas reglas son editables desde <strong>Perfil → Reglas</strong> (admins y moderadores).</div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    Hecho con ❤️ en <span id="city">[Iquitos firebase]</span>
+  </footer>
+
+  <!-- Panel Auth con animación “mano tira” -->
+  <div id="auth-overlay" class="auth-overlay hidden">
+    <div class="pull-hand" id="pull-hand" title="Tira para abrir">✋📱</div>
+    <div class="auth-panel" id="auth-panel">
+      <div class="auth-tabs">
+        <button class="tab active" data-target="signup">Crear cuenta</button>
+        <button class="tab" data-target="login">Iniciar sesión</button>
+      </div>
+
+      <div id="auth-signup" class="auth-pane active">
+        <form id="signup-form" class="form">
+          <input id="su-alias" class="input" placeholder="Alias único (3–20, sin espacios)" maxlength="20" required>
+          <input id="su-name" class="input" placeholder="Tu nombre (privado, solo admin)" maxlength="40" required>
+          <input id="su-email" class="input" type="email" placeholder="Correo" required>
+          <input id="su-pass" class="input" type="password" placeholder="Contraseña (mín. 8)" required>
+          <button class="btn primary" type="submit">Crear cuenta</button>
+        </form>
+      </div>
+
+      <div id="auth-login" class="auth-pane">
+        <form id="login-form" class="form">
+          <input id="li-email" class="input" type="email" placeholder="Correo" required>
+          <input id="li-pass" class="input" type="password" placeholder="Contraseña" required>
+          <button class="btn primary" type="submit">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/firebase.js"></script>
+  <script type="module" src="scripts/ui.js"></script>
+  <script type="module" src="scripts/auth.js"></script>
+</body>
+</html>

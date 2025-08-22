@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Chat y Foros — Comunidad</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-default with-nav">
+  <nav class="app-nav">
+    <a href="home.html">🏠 Inicio</a>
+    <a href="chat.html" class="active">💬 Chat/Foros</a>
+    <a href="store.html">🏪 Tienda</a>
+    <a href="ranking.html">🏆 Ranking</a>
+    <a href="profile.html">👤 Perfil</a>
+    <a href="admin.html" id="nav-admin" class="hidden">🛠️ Admin</a>
+    <button id="btn-logout" class="btn-ghost small">Salir</button>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h3>💬 Sala general</h3>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form" class="row">
+        <input id="chat-input" class="input" maxlength="300" placeholder="Escribe algo…"/>
+        <button class="btn primary">Enviar</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h3>🗂️ Foros</h3>
+        <div class="tabs">
+          <button class="tab active" data-sec="chismes">Chismes</button>
+          <button class="tab" data-sec="deportes">Deportes</button>
+          <button class="tab" data-sec="estudio">Estudio</button>
+          <button class="tab" data-sec="incomodidades">Incomodidades</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <input id="thread-title" class="input" placeholder="Título"/>
+        <input id="thread-body" class="input" placeholder="Contenido…"/>
+        <button id="btn-new-thread" class="btn">Publicar</button>
+      </div>
+
+      <div id="threads" class="threads-list"></div>
+    </section>
+  </main>
+
+  <!-- Reactions popover -->
+  <div id="reactions-pop" class="reactions-pop hidden">
+    <button data-r="like">👍</button>
+    <button data-r="love">❤️</button>
+    <button data-r="haha">😂</button>
+    <button data-r="wow">😮</button>
+    <button data-r="sad">😢</button>
+    <button data-r="angry">😡</button>
+  </div>
+
+  <script type="module" src="scripts/firebase.js"></script>
+  <script type="module" src="scripts/ui.js"></script>
+  <script type="module" src="scripts/chat.js"></script>
+</body>
+</html>

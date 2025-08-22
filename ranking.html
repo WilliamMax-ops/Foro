@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Ranking — Comunidad</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-default with-nav">
+  <nav class="app-nav">
+    <a href="home.html">🏠 Inicio</a>
+    <a href="chat.html">💬 Chat/Foros</a>
+    <a href="store.html">🏪 Tienda</a>
+    <a href="ranking.html" class="active">🏆 Ranking</a>
+    <a href="profile.html">👤 Perfil</a>
+    <a href="admin.html" id="nav-admin" class="hidden">🛠️ Admin</a>
+    <button id="btn-logout" class="btn-ghost small">Salir</button>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <div class="row between">
+        <h3>Top usuarios por 🍪</h3>
+        <div class="row">
+          <input id="rank-date-from" class="input" type="date"/>
+          <input id="rank-date-to" class="input" type="date"/>
+          <button id="rank-filter" class="btn">Filtrar</button>
+        </div>
+      </div>
+      <ul id="ranking-list" class="ranking-list"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="scripts/firebase.js"></script>
+  <script type="module" src="scripts/ui.js"></script>
+  <script type="module" src="scripts/ranking.js"></script>
+</body>
+</html>

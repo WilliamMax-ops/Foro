@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Tienda — Comunidad</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-default with-nav">
+  <nav class="app-nav">
+    <a href="home.html">🏠 Inicio</a>
+    <a href="chat.html">💬 Chat/Foros</a>
+    <a href="store.html" class="active">🏪 Tienda</a>
+    <a href="ranking.html">🏆 Ranking</a>
+    <a href="profile.html">👤 Perfil</a>
+    <a href="admin.html" id="nav-admin" class="hidden">🛠️ Admin</a>
+    <button id="btn-logout" class="btn-ghost small">Salir</button>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h3>Inventario y Monedas</h3>
+      <div class="row">
+        <div>Alias: <strong id="alias-pill">—</strong></div>
+        <div class="pill" id="coins-pill">0 🍪</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Productos</h3>
+      <div id="shop-grid" class="shop-grid"></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <h3>🎡 Ruleta 5 colores</h3>
+        <div class="roulette-wrap">
+          <div id="wheel" class="wheel"></div>
+        </div>
+        <div class="row">
+          <select id="roulette-color" class="input">
+            <option value="red">🔴 Rojo</option>
+            <option value="blue">🔵 Azul</option>
+            <option value="green">🟢 Verde</option>
+            <option value="yellow">🟡 Amarillo</option>
+            <option value="purple">🟣 Morado</option>
+          </select>
+          <input id="roulette-bet" class="input" type="number" min="1" placeholder="Apuesta (🍪)"/>
+          <button id="roulette-spin" class="btn">Girar</button>
+        </div>
+        <div id="roulette-result" class="muted"></div>
+      </div>
+
+      <div class="card">
+        <h3>🪙 Volado (cara/sello)</h3>
+        <div class="coin-wrap">
+          <div id="coin" class="coin">
+            <div class="face front">🙂</div>
+            <div class="face back">⭐</div>
+          </div>
+        </div>
+        <div class="row">
+          <select id="coin-side" class="input">
+            <option value="front">Cara 🙂</option>
+            <option value="back">Sello ⭐</option>
+          </select>
+          <input id="coin-bet" class="input" type="number" min="1" placeholder="Apuesta (🍪)"/>
+          <button id="coin-flip" class="btn">Lanzar</button>
+        </div>
+        <div id="coin-result" class="muted"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>🐾 Mascotas</h3>
+      <div id="pets-grid" class="shop-grid"></div>
+    </section>
+
+    <section class="card">
+      <h3>🎟️ Pase del mes</h3>
+      <div id="pass-info" class="muted"></div>
+      <div id="pass-rewards" class="list"></div>
+    </section>
+  </main>
+
+  <script type="module" src="scripts/firebase.js"></script>
+  <script type="module" src="scripts/ui.js"></script>
+  <script type="module" src="scripts/store.js"></script>
+</body>
+</html>

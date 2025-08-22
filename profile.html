@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Perfil — Comunidad</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-default with-nav">
+  <nav class="app-nav">
+    <a href="home.html">🏠 Inicio</a>
+    <a href="chat.html">💬 Chat/Foros</a>
+    <a href="store.html">🏪 Tienda</a>
+    <a href="ranking.html">🏆 Ranking</a>
+    <a href="profile.html" class="active">👤 Perfil</a>
+    <a href="admin.html" id="nav-admin" class="hidden">🛠️ Admin</a>
+    <button id="btn-logout" class="btn-ghost small">Salir</button>
+  </nav>
+
+  <main class="container grid-2">
+    <section class="card">
+      <h3>Tu perfil</h3>
+      <div class="row">
+        <div class="avatar-xl" id="avatar-xl">🙂</div>
+        <div>
+          <div>Alias: <strong id="pf-alias">—</strong></div>
+          <div>🍪 <strong id="pf-coins">0</strong> | Nivel: <strong id="pf-level">1</strong></div>
+        </div>
+      </div>
+      <form id="alias-form" class="row">
+        <input id="alias-new" class="input" placeholder="Nuevo alias (100 🍪, cooldown 7d)" maxlength="20"/>
+        <button class="btn">Cambiar</button>
+      </form>
+      <div class="muted" id="alias-info"></div>
+
+      <h4>Temas y fuentes</h4>
+      <div class="row">
+        <select id="theme-select" class="input">
+          <option value="theme-default">Clásico</option>
+          <option value="theme-ocean">Océano</option>
+          <option value="theme-sunset">Atardecer</option>
+          <option value="theme-mint">Menta</option>
+          <option value="theme-candy">Caramelo</option>
+          <option value="theme-night">Noche</option>
+          <option value="theme-forest">Bosque</option>
+          <option value="theme-pop">Pop</option>
+        </select>
+        <select id="font-select" class="input">
+          <option value="Poppins">Poppins</option>
+          <option value="Nunito">Nunito</option>
+          <option value="Rubik">Rubik</option>
+        </select>
+        <button id="apply-theme" class="btn">Aplicar</button>
+      </div>
+
+      <h4>Logros</h4>
+      <div id="achievements" class="achievements-grid"></div>
+
+      <h4>Editar reglas (admin/mod)</h4>
+      <textarea id="rules-edit" class="input" rows="4" placeholder="Una regla por línea…"></textarea>
+      <button id="save-rules" class="btn">Guardar reglas</button>
+    </section>
+
+    <section class="card">
+      <h3>Soporte</h3>
+      <form id="support-form" class="form">
+        <input id="sup-email" class="input" type="email" placeholder="Tu correo" required/>
+        <input id="sup-subject" class="input" placeholder="Asunto" required/>
+        <textarea id="sup-body" class="input" rows="5" placeholder="Cuéntanos tu problema…" required></textarea>
+        <button class="btn primary">Enviar</button>
+      </form>
+      <div id="support-status" class="muted"></div>
+    </section>
+  </main>
+
+  <script type="module" src="scripts/firebase.js"></script>
+  <script type="module" src="scripts/ui.js"></script>
+  <script type="module" src="scripts/profile.js"></script>
+</body>
+</html>

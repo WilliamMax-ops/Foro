@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read: if request.auth != null; // cada usuario puede ver perfiles
+      allow create: if request.auth != null && request.auth.uid == uid;
+      allow update: if request.auth != null && request.auth.uid == uid;
+    }
+    match /aliases/{alias} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null; // validación se hace por transacción
+    }
+    match /messages/{id} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+    }
+    match /threads/{id} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow update: if request.auth != null; // para reacciones vía transacción
+    }
+    match /reports/{id} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if request.auth != null && request.auth.token.email == "diazwilliammax@gmail.com";
+    }
+    match /support/{id} {
+      allow create: if request.auth != null;
+      allow read: if false; // solo admin por backend
+    }
+    match /meta/{id} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == "diazwilliammax@gmail.com";
+    }
+  }
+}

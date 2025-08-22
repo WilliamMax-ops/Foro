@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin — Comunidad</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-default with-nav">
+  <nav class="app-nav">
+    <a href="home.html">🏠 Inicio</a>
+    <a href="chat.html">💬 Chat/Foros</a>
+    <a href="store.html">🏪 Tienda</a>
+    <a href="ranking.html">🏆 Ranking</a>
+    <a href="profile.html">👤 Perfil</a>
+    <a href="admin.html" class="active">🛠️ Admin</a>
+    <button id="btn-logout" class="btn-ghost small">Salir</button>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h3>Panel de administración</h3>
+      <div class="muted">Solo visible para <strong id="admin-email"></strong></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <h4>Usuarios</h4>
+        <div id="users-list" class="list"></div>
+      </div>
+      <div class="card">
+        <h4>Reportes</h4>
+        <div id="reports-list" class="list"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h4>Soporte</h4>
+      <div id="support-list" class="list"></div>
+    </section>
+  </main>
+
+  <script type="module" src="scripts/firebase.js"></script>
+  <script type="module" src="scripts/ui.js"></script>
+  <script type="module">
+    import { auth, db, adminEmail, requireAdmin, col, docRef, q, onSnap, ord, lim, upd, delDoc } from './scripts/firebase.js';
+    requireAdmin(); // redirige si no eres admin
+
+    const adminEmailEl = document.getElementById('admin-email');
+    adminEmailEl.textContent = adminEmail;
+
+    // Usuarios (muestra nombre real + alias + correo)
+    onSnap(q(col(db,'users'), ord('createdAt','desc'), lim(100)), snap=>{
+      const list = document.getElementById('users-list'); list.innerHTML='';
+      snap.forEach(d=>{
+        const u = d.data();
+        const el = document.createElement('div'); el.className='list-item';
+        el.innerHTML = `<strong>${u.name || '—'}</strong> · <em>${u.alias || '—'}</em> · ${u.email || ''} · 🍪 ${u.coins||0}`;
+        list.appendChild(el);
+      });
+    });
+
+    // Reportes
+    onSnap(q(col(db,'reports'), ord('createdAt','desc'), lim(200)), snap=>{
+      const list = document.getElementById('reports-list'); list.innerHTML='';
+      snap.forEach(d=>{
+        const r = d.data();
+        const el = document.createElement('div'); el.className='list-item';
+        el.innerHTML = `
+          <div><strong>${r.type}</strong> · ${r.reason}</div>
+          <div class="muted">post:${r.postId||'-'} · de:${r.fromAlias||'-'} · contra:${r.targetAlias||'-'}</div>
+          <div class="row">
+            <button class="btn small" data-close="${d.id}">Marcar resuelto</button>
+            <button class="btn ghost small" data-delete="${d.id}">Eliminar</button>
+          </div>`;
+        list.appendChild(el);
+      });
+    });
+
+    // Soporte
+    onSnap(q(col(db,'support'), ord('createdAt','desc'), lim(200)), snap=>{
+      const list = document.getElementById('support-list'); list.innerHTML='';
+      snap.forEach(d=>{
+        const s = d.data();
+        const el = document.createElement('div'); el.className='list-item';
+        el.innerHTML = `<strong>${s.email}</strong> · ${s.subject}<div class="muted">${s.body}</div>`;
+        list.appendChild(el);
+      });
+    });
+
+    document.addEventListener('click', async (e)=>{
+      const close = e.target.closest('[data-close]');
+      const del = e.target.closest('[data-delete]');
+      if(close){
+        await upd(docRef(db,'reports', close.dataset.close), { status:'resolved' });
+      }
+      if(del){
+        await delDoc(docRef(db,'reports', del.dataset.delete));
+      }
+    });
+  </script>
+</body>
+</html>
